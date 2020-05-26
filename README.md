@@ -2,6 +2,7 @@
 
 ## どうやって使うの
 
+1. [DiscordTextLogger.jar](https://drive.google.com/open?id=13yeQ_CW6vtuuyOY1DaxgY9k5Vifbt1fR) をダウンロードする
 1. Discord Bot を作り Token を取得する ([Discord の Bot を作ろう！](https://shunshun94.github.io/shared/sample/discordBot_101.html))
 1. 環境変数 `TEXT_CHAT_LOGGER_TOKEN` に Token を登録する
 1. [Google Spread Sheets の Java Quickstart](https://developers.google.com/sheets/api/quickstart/java) のページで、 `credentials.json` を取得し、`DiscordTextLogger.jar` と同じディレクトリに配置する。詳細な手順は下記
@@ -26,10 +27,10 @@
 
 ### Google Spread Sheets で作ったシートの ID
 
-シートのURL は `https://docs.google.com/spreadsheets/d/${ID}/`という構造になっています。この `${ID}` がシートの ID となります。
+シートのURL は `https://docs.google.com/spreadsheets/d/${ID}/`という構造になっています。この `${ID}` がシートの ID となる。
 
 例えばシートのアドレスが `https://docs.google.com/spreadsheets/d/7DQ-EnMD9YtLbd7Tjky5hke_6Hv19K1vuoeR-Re7HsBw/` であれば   
-`7DQ-EnMD9YtLbd7Tjky5hke_6Hv19K1vuoeR-Re7HsBw` が ID となります。
+`7DQ-EnMD9YtLbd7Tjky5hke_6Hv19K1vuoeR-Re7HsBw` が ID。
 
 ## 自前でコンパイルする
 
