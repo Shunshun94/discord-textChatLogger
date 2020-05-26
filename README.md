@@ -1,6 +1,6 @@
-=Discord Text Logger=
+# Discord Text Logger
 
-==どうやって使うの==
+## どうやって使うの
 
 1. Discord Bot を作り Token を取得する ([Discord の Bot を作ろう！](https://shunshun94.github.io/shared/sample/discordBot_101.html))
 1. 環境変数 `TEXT_CHAT_LOGGER_TOKEN` に Token を登録する
@@ -17,20 +17,20 @@
 以上の手順で　Bot が発言を収集し始める。
 `DiscordTextLogger.jar`が実行されている間は Bot が見つけた発言は全てスプレッドシートに記録される。
 
-===Google Spread Sheets の credentials.json 取得手順===
+### Google Spread Sheets の credentials.json 取得手順
 
 1. [Google Spread Sheets の Java Quickstart](https://developers.google.com/sheets/api/quickstart/java) にアクセスする
 2. `Enable the Google Sheets API` をクリックする
 3. **Configure your OAuth client** という画面が出てくるので `Desktop app` を選択し、CREATE をクリックする
 4. **You're all set!** という画面が出てくるので `DOWNLOAD CLIENT CONFIGURATION` をクリックし、 `credentials.json` をダウンロードする
 
-===Google Spread Sheets で作ったシートの ID===
+### Google Spread Sheets で作ったシートの ID
 
 シートのURL は `https://docs.google.com/spreadsheets/d/${ID}/`という構造になっています。この `${ID}` がシートの ID となります。
 
 例えばシートのアドレスが `https://docs.google.com/spreadsheets/d/7DQ-EnMD9YtLbd7Tjky5hke_6Hv19K1vuoeR-Re7HsBw/` であれば   
 `7DQ-EnMD9YtLbd7Tjky5hke_6Hv19K1vuoeR-Re7HsBw` が ID となります。
 
-==自前でコンパイルする==
+## 自前でコンパイルする
 
-`$ mvn clean compile package` して生成された `/target/discord-textChatLogger-jar-with-dependencies.jar` を
+`$ mvn clean compile package` して生成された `/target/discord-textChatLogger-jar-with-dependencies.jar` を `DiscordTextLogger.jar` とリネームして使う
