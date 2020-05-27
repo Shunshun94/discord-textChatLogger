@@ -7,6 +7,7 @@ Discord のテキストチャットを Google Spread Sheet にリアルタイム
 
 1. [DiscordTextLogger.jar](https://drive.google.com/open?id=13yeQ_CW6vtuuyOY1DaxgY9k5Vifbt1fR) をダウンロードする
 1. Discord Bot を作り Token を取得する ([Discord の Bot を作ろう！](https://shunshun94.github.io/shared/sample/discordBot_101.html))
+1. Bot を発言を収集したいサーバに追加する
 1. 環境変数 `TEXT_CHAT_LOGGER_TOKEN` に Token を登録する
 1. `credentials.json` を取得し、`DiscordTextLogger.jar` と同じディレクトリに配置する。詳細な手順は下記
 1. [Google Spread Sheets](https://docs.google.com/spreadsheets/u/0/) にアクセスし、空シートを1つ作成し、その ID を取得する
@@ -53,6 +54,10 @@ Discord のテキストチャットを Google Spread Sheet にリアルタイム
 ## ソースコード
 
 [https://github.com/Shunshun94/discord-textChatLogger](https://github.com/Shunshun94/discord-textChatLogger)
+
+## ライセンス
+
+The Apache Software License, Version 2.0
 
 ## 利用しているライブラリ
 
