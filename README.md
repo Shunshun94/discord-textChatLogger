@@ -1,5 +1,8 @@
 # Discord Text Logger
 
+Discord のテキストチャットを Google Spread Sheet にリアルタイムで保存するツール。   
+サーバ管理者はは削除された発言であっても後から何が書き込まれたのかを確認でき、サーバ内で起こったイベントを追跡できる。
+
 ## どうやって使うの
 
 1. [DiscordTextLogger.jar](https://drive.google.com/open?id=13yeQ_CW6vtuuyOY1DaxgY9k5Vifbt1fR) をダウンロードする
