@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.TokenResponseException;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -70,7 +72,14 @@ public class GoogleSpreadSheetLogger implements MessageLogger {
 
 	private void initSheet() throws IOException {
 		String range = "A:G";
-		ValueRange getResult = service.spreadsheets().values().get(sheetId, range).execute();
+		ValueRange getResult;
+		try {
+			getResult = service.spreadsheets().values().get(sheetId, range).execute();
+		} catch (TokenResponseException e) {
+			logger.severe(String.format("Google Spread Sheets に接続するための認証情報が不正 - 詳細：%s", e.getDetails().toPrettyString()));
+			throw new IOException(String.format("Google Spread Sheets に接続するための認証情報が不正です。credentials.json を正しいものに差し替えるか、Tokens ディレクトリを削除して再実行すると上手くいくかもしれません", e.getMessage()), e);
+		}
+
 		List<List<Object>> values = getResult.getValues();
 
 		if (values != null && (! values.isEmpty())) {
@@ -150,7 +159,8 @@ public class GoogleSpreadSheetLogger implements MessageLogger {
 			throw new IOException(String.format("%s is not found", CREDENTIALS_FILE_PATH));
 		}
 		try(InputStream in = new FileInputStream(credentialFile);) {
-			GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+			InputStreamReader isr = new InputStreamReader(in);
+			GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, isr);
 			GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY,
 					clientSecrets, SCOPES)
 							.setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
