@@ -29,9 +29,14 @@ Discord のテキストチャットを Google Spread Sheet にリアルタイム
 #### 楽な方
 
 1. [Google Spread Sheets の Java Quickstart](https://developers.google.com/sheets/api/quickstart/java) にアクセスする
-2. `Enable the Google Sheets API` をクリックする
-3. **Configure your OAuth client** という画面が出てくるので `Desktop app` を選択し、CREATE をクリックする
-4. **You're all set!** という画面が出てくるので `DOWNLOAD CLIENT CONFIGURATION` をクリックし、 `credentials.json` をダウンロードする
+1. `Enable the Google Sheets API` をクリックする
+1. `Enable the Google Sheets API` と書かれた画面が出てくるので `Quickstart` を任意の名前に変更し、 `NEXT` をクリックする
+1. **Configure your OAuth client** という画面が出てくるので `Desktop app` を選択し、CREATE をクリックする
+1. **You're all set!** という画面が出てくるので `DOWNLOAD CLIENT CONFIGURATION` をクリックし、 `credentials.json` をダウンロードする
+
+![Quick Start の Enable the Goole Sheets API をクリックする](images/credential-easyWay-01.png "Quick Start の Enable the Goole Sheets API をクリックする")
+
+![DOWNLOAD CLIENT CONFIGURATION をクリックし、 credentials.json をダウンロードする](images/credential-easyWay-02.png "DOWNLOAD CLIENT CONFIGURATION をクリックし、 credentials.json をダウンロードする")
 
 #### 標準的な方
 
@@ -57,12 +62,13 @@ Discord のテキストチャットを Google Spread Sheet にリアルタイム
 
 ## ライセンス
 
-The Apache Software License, Version 2.0
+GNU General Public License, version 2
 
 ## 利用しているライブラリ
 
 `mvn license:add-third-party -D license.excludedScopes=test` コマンドによる自動生成
 
+* (Apache License, Version 2.0) xsalsa20poly1305 (com.codahale:xsalsa20poly1305:0.10.1 - https://github.com/codahale/xsalsa20poly1305)
 * (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.9.0 - http://github.com/FasterXML/jackson)
 * (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.9.9 - https://github.com/FasterXML/jackson-core)
 * (The Apache Software License, Version 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.9.3 - http://github.com/FasterXML/jackson)
@@ -77,8 +83,8 @@ The Apache Software License, Version 2.0
 * (The Apache Software License, Version 2.0) Jackson 2 extensions to the Google HTTP Client Library for Java. (com.google.http-client:google-http-client-jackson2:1.32.1 - https://github.com/googleapis/google-http-java-client/google-http-client-jackson2)
 * (The Apache Software License, Version 2.0) J2ObjC Annotations (com.google.j2objc:j2objc-annotations:1.3 - https://github.com/google/j2objc/)
 * (The Apache Software License, Version 2.0) Google OAuth Client Library for Java (com.google.oauth-client:google-oauth-client:1.30.3 - https://github.com/googleapis/google-oauth-java-client/google-oauth-client)
-* (The Apache Software License, Version 2.0) Java 6 (and higher) extensions to the Google OAuth Client Library for Java. (com.google.oauth-client:google-oauth-client-java6:1.30.4 - https://github.com/googleapis/google-oauth-java-client/google-oauth-client-java6)
-* (The Apache Software License, Version 2.0) Jetty extensions to the Google OAuth Client Library for Java. (com.google.oauth-client:google-oauth-client-jetty:1.30.4 - https://github.com/googleapis/google-oauth-java-client/google-oauth-client-jetty)
+* (The Apache Software License, Version 2.0) Java 6 (and higher) extensions to the Google OAuth Client Library for Java. (com.google.oauth-client:google-oauth-client-java6:1.30.6 - https://github.com/googleapis/google-oauth-java-client/google-oauth-client-java6)
+* (The Apache Software License, Version 2.0) OAuth 2.0 verification code receiver for Google OAuth Client Library for Java. (com.google.oauth-client:google-oauth-client-jetty:1.30.6 - https://github.com/googleapis/google-oauth-java-client/google-oauth-client-jetty)
 * (The Apache Software License, Version 2.0) com.neovisionaries:nv-websocket-client (com.neovisionaries:nv-websocket-client:2.6 - https://github.com/TakahikoKawasaki/nv-websocket-client)
 * (Apache 2.0) OkHttp Logging Interceptor (com.squareup.okhttp3:logging-interceptor:3.9.1 - https://github.com/square/okhttp/logging-interceptor)
 * (Apache 2.0) OkHttp (com.squareup.okhttp3:okhttp:3.9.1 - https://github.com/square/okhttp/okhttp)
@@ -88,17 +94,14 @@ The Apache Software License, Version 2.0
 * (Apache 2.0) io.grpc:grpc-context (io.grpc:grpc-context:1.22.1 - https://github.com/grpc/grpc-java)
 * (The Apache License, Version 2.0) OpenCensus (io.opencensus:opencensus-api:0.24.0 - https://github.com/census-instrumentation/opencensus-java)
 * (The Apache License, Version 2.0) OpenCensus (io.opencensus:opencensus-contrib-http-util:0.24.0 - https://github.com/census-instrumentation/opencensus-java)
+* (The Apache Software License, Version 2.0) Vavr (io.vavr:vavr:0.10.1 - http://vavr.io)
+* (The Apache Software License, Version 2.0) Vavr Match (io.vavr:vavr-match:0.10.1 - http://vavr.io)
 * (Apache License, Version 2.0) Apache HttpClient (org.apache.httpcomponents:httpclient:4.5.10 - http://hc.apache.org/httpcomponents-client)
 * (Apache License, Version 2.0) Apache HttpCore (org.apache.httpcomponents:httpcore:4.4.12 - http://hc.apache.org/httpcomponents-core-ga)
 * (Apache License, Version 2.0) Apache Log4j API (org.apache.logging.log4j:log4j-api:2.11.0 - https://logging.apache.org/log4j/2.x/log4j-api/)
+* (Bouncy Castle Licence) Bouncy Castle Provider (org.bouncycastle:bcprov-jdk15on:1.59 - http://www.bouncycastle.org/java.html)
 * (GNU General Public License, version 2 (GPL2), with the classpath exception) (The MIT License) Checker Qual (org.checkerframework:checker-compat-qual:2.5.5 - https://checkerframework.org)
 * (MIT license) Animal Sniffer Annotations (org.codehaus.mojo:animal-sniffer-annotations:1.17 - http://www.mojohaus.org/animal-sniffer/animal-sniffer-annotations)
-* (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Continuation (org.eclipse.jetty:jetty-continuation:8.2.0.v20160908 - http://www.eclipse.org/jetty)
-* (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Http Utility (org.eclipse.jetty:jetty-http:8.2.0.v20160908 - http://www.eclipse.org/jetty)
-* (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: IO Utility (org.eclipse.jetty:jetty-io:8.2.0.v20160908 - http://www.eclipse.org/jetty)
-* (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Server Core (org.eclipse.jetty:jetty-server:8.2.0.v20160908 - http://www.eclipse.org/jetty)
-* (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Utilities (org.eclipse.jetty:jetty-util:8.2.0.v20160908 - http://www.eclipse.org/jetty)
-* (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty Orbit :: Servlet API (org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016 - http://www.eclipse.org/jetty/jetty-orbit/javax.servlet)
-* (Apache License, Version 2.0) Javacord (org.javacord:javacord:3.0.5 - https://www.javacord.org)
-* (Apache License, Version 2.0) Javacord (api) (org.javacord:javacord-api:3.0.5 - https://www.javacord.org)
-* (Apache License, Version 2.0) Javacord (core) (org.javacord:javacord-core:3.0.5 - https://www.javacord.org)
+* (Apache License, Version 2.0) Javacord (org.javacord:javacord:3.1.1 - https://www.javacord.org)
+* (Apache License, Version 2.0) Javacord (api) (org.javacord:javacord-api:3.1.1 - https://www.javacord.org)
+* (Apache License, Version 2.0) Javacord (core) (org.javacord:javacord-core:3.1.1 - https://www.javacord.org)
