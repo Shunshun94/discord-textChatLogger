@@ -1,6 +1,9 @@
 #!/usr/local/bin/python
 import cgi
 import os
+import sys
+sys.path.append('./pynacl/src')
+
 from nacl.signing import VerifyKey
 
 ed55519 = os.environ['HTTP_X-SIGNATURE-ED25519']
