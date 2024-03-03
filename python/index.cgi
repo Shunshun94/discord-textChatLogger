@@ -4,9 +4,14 @@ import os
 import sys
 import ed25519
 import logging
+import myconfiguration
 
 def verify(signature, timestamp, body):
-    return False
+    try:
+        ed25519.checkvalid(bytes.fromhex(signature), f"{timestamp}{body}".encode(), bytes.fromhex(myconfiguration.PUBLIC_KEY))
+        return True
+    except Exception:
+        return False
 
 
 try:
@@ -20,6 +25,7 @@ try:
     logging.error(body['type'])
 
     if not verify(ed25519Value, timestamp, rawBody):
+        logging.error('Failed to validate ed25519 signature')
         print("Status: 401 Unautorized")
         print("Content-Type: text/html")
         print()
@@ -51,8 +57,16 @@ except KeyError as error:
     <html>
     <head><meta charset="UTF-8" /></head>
     <body>
-    <h1>Discord app によるアクセスを受け付けるようにここは作られています</h1>
-    <p>なのでブラウザでアクセスしても何も見せられません＞＜</p>
+    <h1>
+    '''
+    htmlText += myconfiguration.BROWSER_ACCESS_HEADER
+    htmlText += '''
+    </h1>
+    <p>
+    '''
+    htmlText += myconfiguration.BROWSER_ACCESS_TEXT
+    htmlText += '''
+    </p>
     </body></html>
     '''
     print( htmlText.encode("UTF-8", 'ignore').decode('UTF-8') )
