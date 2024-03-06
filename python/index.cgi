@@ -46,6 +46,12 @@ try:
         print("Content-Type: text/json")
         print()
         print("{\"type\": 1}")
+    if body['type'] == 2:
+        print("Status: 200 OK")
+        print("Content-Type: text/json")
+        print()
+        print("{\"type\": 4, \"data\": { \"content\": \"firststep\" }}")
+        logging.error("return")
 
 except KeyError as error:
     logging.error(error)
