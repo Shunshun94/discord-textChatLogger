@@ -47,10 +47,12 @@ try:
         print()
         print("{\"type\": 1}")
     if body['type'] == 2:
+        channel = body['channel']
+        logging.error("https://discord.com/channels/" + channel["guild_id"] + "/" + channel["id"])
         print("Status: 200 OK")
         print("Content-Type: text/json")
         print()
-        print("{\"type\": 4, \"data\": { \"content\": \"firststep\" }}")
+        print("{\"type\":4,\"data\":{\"content\":\"firststep\"}}")
         logging.error("return")
 
 except KeyError as error:
