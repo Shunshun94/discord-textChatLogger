@@ -49,15 +49,9 @@ try:
         print()
         print("{\"type\": 1}")
     if body['type'] == 2:
-        url = "https://discord.com/api/webhooks/" + body["application_id"] + "/" + body["token"]
-        logging.error(url)
-        data = "{\"type\":4,\"data\":{\"content\":\"firststep\",\"tts\":false}}"
-        header = { 'Content-Type': 'application/json', 'User-Agent': 'DiscordBot (https://shunshun94.github.io, 10)' }
-        req = urllib.request.Request(url, data=data.encode(), method='POST', headers=header)
-        print("Content-Type: text/json")
+        print("Content-Type: application/json;charset=UTF-8")
         print()
-        print("{\"type\":4,\"data\":{\"content\":\"firststep\",\"tts\":false}}")
-        urllib.request.urlopen(req)
+        print("{\"type\":4,\"data\":{\"content\":\"firststep\"}}")
         logging.error("return")
 
 except KeyError as error:
