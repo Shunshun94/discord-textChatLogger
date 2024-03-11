@@ -4,6 +4,8 @@ import os
 import sys
 import ed25519
 import logging
+import asyncio
+import urllib.request
 import myconfiguration
 
 def verify(signature, timestamp, body):
@@ -47,12 +49,15 @@ try:
         print()
         print("{\"type\": 1}")
     if body['type'] == 2:
-        channel = body['channel']
-        logging.error("https://discord.com/channels/" + channel["guild_id"] + "/" + channel["id"])
-        print("Status: 200 OK")
+        url = "https://discord.com/api/webhooks/" + body["application_id"] + "/" + body["token"]
+        logging.error(url)
+        data = "{\"type\":4,\"data\":{\"content\":\"firststep\",\"tts\":false}}"
+        header = { 'Content-Type': 'application/json', 'User-Agent': 'DiscordBot (https://shunshun94.github.io, 10)' }
+        req = urllib.request.Request(url, data=data.encode(), method='POST', headers=header)
         print("Content-Type: text/json")
         print()
-        print("{\"type\":4,\"data\":{\"content\":\"firststep\"}}")
+        print("{\"type\":4,\"data\":{\"content\":\"firststep\",\"tts\":false}}")
+        urllib.request.urlopen(req)
         logging.error("return")
 
 except KeyError as error:
