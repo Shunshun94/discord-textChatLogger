@@ -49,9 +49,12 @@ try:
         print()
         print("{\"type\": 1}")
     if body['type'] == 2:
+        print("Status: 200 OK")
         print("Content-Type: application/json;charset=UTF-8")
         print()
         print("{\"type\":4,\"data\":{\"content\":\"firststep\"}}")
+        with open('./requestsList', mode='a') as requestList:
+            requestList.write(f'{body["guild_id"]},{body["channel_id"]},{body["token"]}\n')
         logging.error("return")
 
 except KeyError as error:
