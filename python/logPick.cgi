@@ -1,9 +1,6 @@
 #!/usr/local/bin/python
 import json
-import os
-import sys
 import logging
-import asyncio
 import urllib.request
 import myconfiguration
 
@@ -18,8 +15,16 @@ def getTopLine():
             fp.writelines(lines[1:])
     return result
 
-def getLog(channel, sentinel):
-    token = myconfiguration.ACCESS_TOKEN
+def getLog(channel):
+    url = f'https://discordapp.com/api/channels/{channel}/messages'
+    headers = {
+        'Authorization': f'Bot {myconfiguration.ACCESS_TOKEN}',
+        'User-Agent': 'DiscordBot (https://github.com/Shunshun94/discord-textChatLogger, 10)'
+    }
+    req = urllib.request.Request(url, headers = headers)
+    with urllib.request.urlopen(req) as res:
+        body = res.read()
+    return body
 
 
 logging.error('start to parse requests')
@@ -37,4 +42,4 @@ requestToken = target[2]
 print("Status: 200 OK")
 print("Content-Type: text/html")
 print()
-print(f'<p>{server} / {channel}</p>\n')
+print(f'<p>{getLog(channel)}</p>\n')

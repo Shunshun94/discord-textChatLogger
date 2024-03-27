@@ -4,8 +4,6 @@ import os
 import sys
 import ed25519
 import logging
-import asyncio
-import urllib.request
 import myconfiguration
 
 def verify(signature, timestamp, body):
