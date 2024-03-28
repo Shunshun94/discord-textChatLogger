@@ -1,5 +1,6 @@
 #!/usr/local/bin/python
 import json
+import time
 import logging
 import urllib.request
 import myconfiguration
@@ -15,8 +16,10 @@ def getTopLine():
             fp.writelines(lines[1:])
     return result
 
-def getLog(channel):
-    url = f'https://discordapp.com/api/channels/{channel}/messages'
+def getLog(channel, before):
+    logging.error(f'log get {before}')
+    suffix = f'?before={before}' if before else '?dummy'
+    url = f'https://discordapp.com/api/channels/{channel}/messages{suffix}'
     headers = {
         'Authorization': f'Bot {myconfiguration.ACCESS_TOKEN}',
         'User-Agent': 'DiscordBot (https://github.com/Shunshun94/discord-textChatLogger, 10)'
@@ -24,8 +27,21 @@ def getLog(channel):
     req = urllib.request.Request(url, headers = headers)
     with urllib.request.urlopen(req) as res:
         body = res.read()
-    return body
+    return json.loads(body)
 
+def getLogs(channel):
+    before = 0
+    lastLength = 1
+    result = []
+    while lastLength:
+        tmp = getLog(channel, before)
+        result.extend(tmp)
+        lastLength = len(tmp)
+        if lastLength > 0:
+            before = tmp[-1]['id']
+            time.sleep(3)
+    result.reverse()
+    return json.dumps(result)
 
 logging.error('start to parse requests')
 targets = getTopLine()
@@ -42,4 +58,4 @@ requestToken = target[2]
 print("Status: 200 OK")
 print("Content-Type: text/html")
 print()
-print(f'<p>{getLog(channel)}</p>\n')
+print(f'<p>{getLogs(channel)}</p>\n')
