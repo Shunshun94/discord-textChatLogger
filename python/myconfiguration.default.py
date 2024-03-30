@@ -8,4 +8,4 @@ PUBLIC_KEY = ""
 ACCESS_TOKEN = ""
 BROWSER_ACCESS_HEADER = "Discord app によるアクセスを受け付けるようにここは作られています"
 BROWSER_ACCESS_TEXT = "なのでブラウザでアクセスしても何も見せられません＞＜"
-
+MAX_LOG_GET_TIMES = 20

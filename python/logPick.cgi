@@ -16,8 +16,8 @@ def getTopLine():
             fp.writelines(lines[1:])
     return result
 
-def getLog(channel, before):
-    logging.error(f'log get {before}')
+def getLog(channel, before, iterationCount):
+    logging.error(f'log get {channel} / before = {before} / iteration = {iterationCount} ')
     suffix = f'?before={before}' if before else '?dummy'
     url = f'https://discordapp.com/api/channels/{channel}/messages{suffix}'
     headers = {
@@ -33,12 +33,15 @@ def getLogs(channel):
     before = 0
     lastLength = 1
     result = []
-    while lastLength:
-        tmp = getLog(channel, before)
+    iterationCount = 0
+    maxIteration = myconfiguration.MAX_LOG_GET_TIMES
+    while (lastLength and iterationCount < maxIteration):
+        tmp = getLog(channel, before, iterationCount)
         result.extend(tmp)
         lastLength = len(tmp)
         if lastLength > 0:
             before = tmp[-1]['id']
+            iterationCount += 1
             time.sleep(3)
     result.reverse()
     return json.dumps(result)
