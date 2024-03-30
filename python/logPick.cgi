@@ -1,9 +1,12 @@
 #!/usr/local/bin/python
 import json
 import time
+import html
 import logging
 import urllib.request
 import myconfiguration
+
+maxIteration = myconfiguration.MAX_LOG_GET_TIMES
 
 def getTopLine():
     result = ""
@@ -17,8 +20,8 @@ def getTopLine():
     return result
 
 def getLog(channel, before, iterationCount):
-    logging.error(f'log get {channel} / before = {before} / iteration = {iterationCount} ')
-    suffix = f'?before={before}' if before else '?dummy'
+    logging.error(f'log get {channel} / before = {before} / iteration = {iterationCount + 1}/{maxIteration} ')
+    suffix = f'?before={before}&limit=100' if before else '?limit=100'
     url = f'https://discordapp.com/api/channels/{channel}/messages{suffix}'
     headers = {
         'Authorization': f'Bot {myconfiguration.ACCESS_TOKEN}',
@@ -29,12 +32,20 @@ def getLog(channel, before, iterationCount):
         body = res.read()
     return json.loads(body)
 
+def logJsonToHtml(json):
+    return """
+    <p>
+    <span></span>
+    <span>{username}</span>
+    <span>{content}</span>
+    </p>
+    """.format( username = html.escape(json["author"]["username"]), content = "<br/>".join(list(map(html.escape, json["content"].split('\n')))) )
+
 def getLogs(channel):
     before = 0
     lastLength = 1
     result = []
     iterationCount = 0
-    maxIteration = myconfiguration.MAX_LOG_GET_TIMES
     while (lastLength and iterationCount < maxIteration):
         tmp = getLog(channel, before, iterationCount)
         result.extend(tmp)
@@ -44,7 +55,7 @@ def getLogs(channel):
             iterationCount += 1
             time.sleep(3)
     result.reverse()
-    return json.dumps(result)
+    return "\n".join(list(map(logJsonToHtml, result)))
 
 logging.error('start to parse requests')
 targets = getTopLine()
@@ -61,4 +72,4 @@ requestToken = target[2]
 print("Status: 200 OK")
 print("Content-Type: text/html")
 print()
-print(f'<p>{getLogs(channel)}</p>\n')
+print(f'<!DOCTYPE html><html><head><link rel=\"stylesheet\" href=\"https://shunshun94.github.io/shared/jquery/io/github/shunshun94/trpg/logEditor/resources/default.css\" type=\"text/css\"><meta charset=\"UTF-8\" /></head><body>{getLogs(channel)}</body></html>')
