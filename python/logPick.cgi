@@ -8,6 +8,25 @@ import myconfiguration
 
 maxIteration = myconfiguration.MAX_LOG_GET_TIMES
 
+def postWebhook(applicationId, token):
+    url = f'https://discordapp.com/api/webhooks/{applicationId}/{token}'
+    logging.error(url)
+    headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': 'DiscordBot (https://github.com/Shunshun94/discord-textChatLogger, 10)'
+    }
+    data = {
+        'content': "download",
+    }
+    request = urllib.request.Request(url, json.dumps(data).encode(), headers, method='POST')
+    try:
+        with urllib.request.urlopen(request) as res:
+            logging.error(res.read())
+    except urllib.error.HTTPError as err:
+        logging.error(err)
+    except urllib.error.URLError as err:
+        logging.error(err)
+
 def getTopLine():
     result = ""
     with open("requestsList", "r+") as fp:
@@ -68,8 +87,11 @@ target = targets.split(',')
 server = target[0]
 channel = target[1]
 requestToken = target[2]
+applicationId = myconfiguration.APPLICATION_ID
 
 print("Status: 200 OK")
 print("Content-Type: text/html")
 print()
 print(f'<!DOCTYPE html><html><head><link rel=\"stylesheet\" href=\"https://shunshun94.github.io/shared/jquery/io/github/shunshun94/trpg/logEditor/resources/default.css\" type=\"text/css\"><meta charset=\"UTF-8\" /></head><body>{getLogs(channel)}</body></html>')
+
+postWebhook(applicationId, requestToken)
