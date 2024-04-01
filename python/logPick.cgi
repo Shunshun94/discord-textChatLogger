@@ -2,30 +2,34 @@
 import json
 import time
 import html
+import os
 import logging
 import urllib.request
 import myconfiguration
 
 maxIteration = myconfiguration.MAX_LOG_GET_TIMES
 
-def postWebhook(applicationId, token):
+def postWebhook(applicationId, token, channel):
     url = f'https://discordapp.com/api/webhooks/{applicationId}/{token}'
     logging.error(url)
     headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json',#'Content-Type': 'multipart/form-data',
         'User-Agent': 'DiscordBot (https://github.com/Shunshun94/discord-textChatLogger, 10)'
     }
     data = {
         'content': "download",
     }
-    request = urllib.request.Request(url, json.dumps(data).encode(), headers, method='POST')
-    try:
-        with urllib.request.urlopen(request) as res:
-            logging.error(res.read())
-    except urllib.error.HTTPError as err:
-        logging.error(err)
-    except urllib.error.URLError as err:
-        logging.error(err)
+    with open(f'./{channel}.html', mode='rb') as file:
+        # どうやって file を urllib.request.Request で添付すればいい？
+        # さくらのレンタルサーバのプランによっては request のライブラリは使えないので
+        request = urllib.request.Request(url, json.dumps(data).encode(), headers, method='POST')
+        try:
+            with urllib.request.urlopen(request) as res:
+                logging.error(res.read())
+        except urllib.error.HTTPError as err:
+            logging.error(err)
+        except urllib.error.URLError as err:
+            logging.error(err)
 
 def getTopLine():
     result = ""
@@ -76,6 +80,13 @@ def getLogs(channel):
     result.reverse()
     return "\n".join(list(map(logJsonToHtml, result)))
 
+def writeFile(channel, text):
+    with open(f'./{channel}.html', mode='w') as f:
+        f.write(text)
+
+def deleteFile(channel):
+    os.remove(f'./{channel}.html')
+
 logging.error('start to parse requests')
 targets = getTopLine()
 if targets == "":
@@ -89,9 +100,12 @@ channel = target[1]
 requestToken = target[2]
 applicationId = myconfiguration.APPLICATION_ID
 
-print("Status: 200 OK")
-print("Content-Type: text/html")
-print()
-print(f'<!DOCTYPE html><html><head><link rel=\"stylesheet\" href=\"https://shunshun94.github.io/shared/jquery/io/github/shunshun94/trpg/logEditor/resources/default.css\" type=\"text/css\"><meta charset=\"UTF-8\" /></head><body>{getLogs(channel)}</body></html>')
 
-postWebhook(applicationId, requestToken)
+writeFile(channel, f'<!DOCTYPE html><html><head><link rel=\"stylesheet\" href=\"https://shunshun94.github.io/shared/jquery/io/github/shunshun94/trpg/logEditor/resources/default.css\" type=\"text/css\"><meta charset=\"UTF-8\" /></head><body>{getLogs(channel)}</body></html>')
+
+postWebhook(applicationId, requestToken, channel)
+deleteFile(channel)
+
+print("Status: 200 OK")
+print("Content-Type: text/html\n")
+print()
