@@ -18,7 +18,7 @@ def postWebhook(applicationId, token, channel):
         'User-Agent': 'DiscordBot (https://github.com/Shunshun94/discord-textChatLogger, 10)'
     }
     data = {
-        'content': f'[download]({myconfiguration.DOWNLOAD_PATH}{channel}.zip)',
+        'content': f'[ダウンロード]({myconfiguration.DOWNLOAD_PATH}{channel}.zip) このダウンロードリンクは明日以降どこかのタイミングで利用できなくなるので今のうちにダウンロードしてください',
     }
     request = urllib.request.Request(url, json.dumps(data).encode(), headers, method='POST')
     try:
