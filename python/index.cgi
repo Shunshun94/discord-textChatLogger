@@ -50,7 +50,7 @@ try:
         print("Status: 200 OK")
         print("Content-Type: application/json;charset=UTF-8")
         print()
-        print("{\"type\":4,\"data\":{\"content\":\"ログを取得します。最大1時間程度お待ちください\"}}")
+        print("{\"type\":4,\"data\":{\"content\":\"ログを取得します。最大15分程度お待ちください\"}}")
         with open('./requestsList', mode='a') as requestList:
             requestList.write(f'{body["guild_id"]},{body["channel_id"]},{body["token"]}\n')
         logging.error("return")
