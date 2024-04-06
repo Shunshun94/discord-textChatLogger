@@ -79,9 +79,13 @@ def getLogs(channel):
     return "\n".join(list(map(logJsonToHtml, result)))
 
 def writeFile(channel, text):
-    with zipfile.ZipFile(f'{channel}.zip', mode='w', compression=zipfile.ZIP_STORED, strict_timestamps=False) as zf:
-        with zf.open(f'./{channel}.html', 'w') as f:
-            f.write(text.encode('utf-8'))
+    # 8cd4589aec7122ffd860b4880f6613ba224f03fa のようにするともっと単純に書けるが、
+    # そうすると windows でうまく unzip できないのでこっちの書き方
+    with open(f'./{channel}.html', mode='w') as f:
+        f.write(text)
+    with zipfile.ZipFile(f'{channel}.zip', mode='w', compression=zipfile.ZIP_DEFLATED, strict_timestamps=False) as zf:
+        zf.write(f'./{channel}.html')
+    os.remove(f'./{channel}.html')
 
 logging.error('start to parse requests')
 targets = getTopLine()
