@@ -3,6 +3,7 @@ import json
 import time
 import html
 import os
+import sys
 import logging
 import zipfile
 import urllib.request
@@ -94,6 +95,7 @@ if targets == "":
     print("Content-Type: text/html")
     print()
     print("<!DOCTYPE html><html><head><meta charset=\"UTF-8\" /></head><body><p>中身がなにもないよ</p></body></html>\n")
+    sys.exit(0)
 target = targets.split(',')
 server = target[0]
 channel = target[1]
