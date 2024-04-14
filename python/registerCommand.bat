@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -H "Authorization:Bot %1" -d "{\"name\":\"download_log\", \"description\": \"To download text logs in this channel or thread\"}" https://discordapp.com/api/applications/%2/commands
