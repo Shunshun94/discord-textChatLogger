@@ -1,3 +1,7 @@
+# エンドユーザ向けガイド
+
+[こちら](./end_user_guide.md)
+
 # 設定ファイル
 
 [myconfiguration.default.py](./myconfiguration.default.py) を編集して使います。
@@ -12,10 +16,10 @@
 1. Discord が [CGI サーバ](./index.cgi) に受け付けた情報を送信する
 1. [CGI サーバ](./index.cgi) がスラッシュコマンドを受けた際に受け取ったチャンネル情報を DL 待ち一覧に積む
 1. [CGI サーバ](./index.cgi) が Discord に依頼を受け付けた旨を返答をする
-1. DL 用ツールが DL 待ち一覧から取得すべきチャンネルの情報を取得する
-1. DL 用ツールがチャンネル情報に基づいて Discord のログを収集する
-1. DL 用ツールが収集したログを html として出力し、出力した html を zip してアップロードする
-1. DL 用ツールが Discord に zip ファイルの URL を送信し、DL を促す
+1. [DL 用ツール](./logPick.cgi)が DL 待ち一覧から取得すべきチャンネルの情報を取得する
+1. [DL 用ツール](./logPick.cgi)がチャンネル情報に基づいて Discord のログを収集する
+1. [DL 用ツール](./logPick.cgi)が収集したログを html として出力し、出力した html を zip してアップロードする
+1. [DL 用ツール](./logPick.cgi)が Discord に zip ファイルの URL を送信し、DL を促す
 
 ![各ツールの関係](./img/relation.drawio.svg)
 
